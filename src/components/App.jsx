@@ -13,23 +13,42 @@ export class App extends Component {
     ],
     filter: '',
   };
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.addContact();
-  // };
+  handleSubmit = newContact => {
+    const { contacts } = this.state;
+    if (
+      contacts.find(
+        ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
+      )
+    ) {
+      return alert(`${newContact.name} is already in contacts!`);
+    }
+    this.setState(({ contacts }) => ({ contacts: [...contacts, newContact] }));
+  };
+  setFilter = value => {
+    this.setState({ filter: value });
+  };
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(item =>
+      item.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+  onDelete = idToDelete => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(({ id }) => id !== idToDelete),
+    }));
+  };
   render() {
+    const { handleSubmit, setFilter, getFilteredContacts, onDelete } = this;
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm
-          onSubmit={this.handleSubmit}
-          addContact={this.addContact}
-        />
+        <ContactForm onSubmit={handleSubmit} />
 
         <h2>Contacts</h2>
-        <Filter />
-        <ContactList contacts={this.state.contacts} />
+        <Filter filter={this.state.filter} setFilter={setFilter} />
+        <ContactList contacts={getFilteredContacts()} onDelete={onDelete} />
       </div>
     );
   }
-};
+}
