@@ -1,24 +1,24 @@
 import { Component } from "react";
-// import { nanoid } from "nanoid";
+import { nanoid } from "nanoid";
 
 export class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
-//   handleChange = ({ target: { value, name } }) => {
-//     this.setState({ [name]: value });
-//   };
-//   addContact = () => {
-//     const newContact = {
-//       name: this.state.name,
-//       number: this.state.number,
-//       id: nanoid(),
-//     };
-//     this.setState(prev => ({
-//       contacts: [...prev.contacts, newContact],
-//     }));
-//   };
+  handleChange = ({ target: { value, name } }) => {
+    this.setState({ [name]: value });
+  };
+  addContact = () => {
+    const newContact = {
+      name: this.state.name,
+      number: this.state.number,
+      id: nanoid(),
+    };
+    this.setState(prev => ({
+      contacts: [...prev.contacts, newContact],
+    }));
+  };
     render() {
         return <form>
       <label>Name</label>
