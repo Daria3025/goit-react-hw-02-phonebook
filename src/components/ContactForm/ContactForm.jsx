@@ -16,7 +16,6 @@ export class ContactForm extends Component {
     const {
       initialState,
       props: { onSubmit },
-      setState,
       state: { name, number },
     } = this;
     e.preventDefault();
@@ -26,7 +25,7 @@ export class ContactForm extends Component {
       id: nanoid(),
     };
     onSubmit(newContact);
-    setState(initialState);
+    this.setState(initialState);
   };
 
   render() {
