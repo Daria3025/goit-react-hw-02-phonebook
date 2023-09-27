@@ -6,7 +6,7 @@ export class ContactForm extends Component {
     name: '',
     number: '',
   };
-  state = this.initialState;
+  state = { ...this.initialState };
 
   handleChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
